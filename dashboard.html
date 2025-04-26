@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#2c2d5b] text-white min-h-screen">
+    <!-- Header -->
+    <header class="bg-[#0f0e2c] text-white flex justify-between items-center p-4 px-8 shadow-md">
+        <div class="text-2xl font-bold">WebWork</div>
+        <nav class="space-x-6 text-sm">
+            <a href="#" class="hover:underline">About</a>
+            <a href="#" class="hover:underline">Contact</a>
+            <a href="#" class="hover:underline">Login</a>
+            <a href="#" class="hover:underline">Sign in</a>
+        </nav>
+    </header>
+
+    <!-- Cover Photo -->
+    <div class="w-full h-52 bg-cover bg-center" style="background-image: url('/static/bg.jpg');"></div>
+
+    <!-- Profile Section -->
+    <main class="p-6 max-w-5xl mx-auto bg-[#525275] rounded-xl mt-[-4rem] shadow-lg relative z-10">
+        <div class="flex flex-col md:flex-row items-center md:items-start space-x-0 md:space-x-6">
+            <!-- Profile Picture -->
+            <div class="relative w-32 h-32 mb-4 md:mb-0">
+                <img src="/static/profile.png" alt="Profile" class="rounded-full border-4 border-white">
+                <div class="absolute bottom-1 right-1 bg-blue-500 rounded-full p-1">
+                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 00-1.414 0L9 11.586 6.707 9.293a1 1 0 00-1.414 1.414L9 14.414l7.121-7.121a1 1 0 000-1.414z"/></svg>
+                </div>
+            </div>
+
+            <!-- Info -->
+            <div>
+                <h2 class="text-2xl font-semibold">Venz Bidaure</h2>
+                <p class="text-sm">CEO of WebWork</p>
+                <p class="text-sm text-gray-300">📍 Iloilo City, Jaro</p>
+                <div class="flex space-x-4 mt-2">
+                    <a href="#" class="text-blue-400 hover:underline">Facebook</a>
+                    <a href="#" class="text-blue-400 hover:underline">X</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="mt-6 text-sm">
+            <p>📞 +63********** (Office)</p>
+            <p>📞 +63********** (Mobile)</p>
+            <p>📧 <a href="mailto:VenzBidaure@gmail.com" class="underline">VenzBidaure@gmail.com</a></p>
+            <button class="mt-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-full text-white">💬 Chat</button>
+        </div>
+
+        <!-- Card Section -->
+        <section class="mt-8">
+            <h3 class="text-xl font-semibold mb-4">Your WebWork Cards</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for card in user_cards %}
+                <div class="bg-[#1e1f3d] p-4 rounded-xl shadow-md hover:shadow-xl transition-all">
+                    <img src="{{ card.image_url }}" alt="Card Image" class="w-full h-40 object-cover rounded-md mb-3">
+                    <h4 class="text-lg font-bold">{{ card.title }}</h4>
+                    <p class="text-sm text-gray-300 mb-2">{{ card.description }}</p>
+                    <a href="{{ card.link }}" class="text-blue-400 underline text-sm">View More</a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Rating -->
+        <div class="mt-6 flex items-center space-x-2">
+            <div class="text-yellow-400 text-xl">★★★★★</div>
+            <p class="text-sm text-gray-300">(1042 responses)</p>
+        </div>
+
+        <!-- Logout -->
+        <div class="mt-6">
+            <a href="{{ url_for('home') }}" class="text-black underline">Logout</a>
+        </div>
+    </main>
+</body>
+</html>
