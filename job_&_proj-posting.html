@@ -249,6 +249,42 @@
       });
     });
   </script>
+  <script>
+    // Get all category checkboxes
+    const categoryCheckboxes = document.querySelectorAll('aside input[type="checkbox"]:not(#toggle-categories)');
+    
+    // Listen to changes on checkboxes
+    categoryCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', filterJobs);
+    });
+  
+    function filterJobs() {
+      // Get all selected categories
+      const selectedCategories = Array.from(categoryCheckboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.nextElementSibling.textContent.trim().toLowerCase());
+      
+      // Get all job cards
+      const jobCards = document.querySelectorAll('main section > div');
+  
+      jobCards.forEach(card => {
+        // Get all tags inside this job card
+        const tags = Array.from(card.querySelectorAll('.flex.gap-2 span'))
+          .map(tag => tag.textContent.replace('#', '').toLowerCase());
+        
+        // If no category selected → show all
+        if (selectedCategories.length === 0) {
+          card.style.display = '';
+          return;
+        }
+  
+        // If any selected category matches a tag → show; else hide
+        const hasMatch = selectedCategories.some(category => tags.includes(category));
+        card.style.display = hasMatch ? '' : 'none';
+      });
+    }
+  </script>
+  
 
 </body>
 </html>
